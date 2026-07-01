@@ -3,28 +3,59 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello World CIO Demo</title>
+    <title>Kensington & Chelsea Air Quality</title>
     <meta
       name="description"
-      content="A minimal Hello World app for testing GitHub Codespaces and Vercel deployment."
+      content="A Vercel-ready static app that stores and charts Kensington and Chelsea air-quality index data."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="page-shell">
       <section class="hero-card" aria-labelledby="page-title">
-        <p class="eyebrow">GitHub Codespaces + Vercel proof</p>
-        <h1 id="page-title">Hello world.</h1>
+        <p class="eyebrow">Vercel static app + browser datastore</p>
+        <h1 id="page-title">Kensington & Chelsea air quality.</h1>
         <p class="intro">
-          This minimal site proves that a browser-only coding workflow can be
-          created in GitHub Codespaces and deployed quickly to Vercel.
+          This app fetches the latest daily monitoring index as JSON for Kensington &
+          Chelsea, stores the response in the browser, and renders the readings
+          as a bar chart.
         </p>
         <div class="status-panel" aria-label="Demo checklist">
-          <span>✅ Codespace-ready</span>
+          <span>✅ Public data source</span>
+          <span>✅ localStorage cache</span>
+          <span>✅ SVG-free CSS bar chart</span>
           <span>✅ Vercel-ready</span>
-          <span>✅ No build step</span>
         </div>
       </section>
+
+      <section class="data-card" aria-labelledby="data-title">
+        <div class="data-header">
+          <div>
+            <p class="eyebrow">Latest monitoring index</p>
+            <h2 id="data-title">Pollutant index bar chart</h2>
+            <p class="data-intro">
+              Bars use the UK Daily Air Quality Index scale from 1 to 10. The
+              fetched snapshot is saved locally first, then the chart is built
+              from that stored data.
+            </p>
+          </div>
+          <button id="refresh-data" type="button">Refresh data</button>
+        </div>
+
+        <p id="data-status" class="data-status" role="status" aria-live="polite">
+          Loading air-quality data...
+        </p>
+
+        <ul id="air-chart" class="air-chart" aria-label="Air-quality index bar chart"></ul>
+
+        <footer class="data-footer">
+          <span id="updated-at">No stored data yet</span>
+          <a id="source-link" href="https://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/LocalAuthorityId=20/Json">
+            Imperial College London Air Quality API
+          </a>
+        </footer>
+      </section>
     </main>
+    <script src="app.js" defer></script>
   </body>
 </html>
