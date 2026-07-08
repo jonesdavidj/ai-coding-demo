@@ -1,5 +1,5 @@
-import { scoreShopForCategory } from './scoreShop';
-import { buildGoogleMapsUrl } from './mapsUrl';
+import { scoreShopForCategory } from './scoreShop.js';
+import { buildGoogleMapsUrl } from './mapsUrl.js';
 const WALK_MIN_PER_KM = 12;
 const COVERAGE_THRESHOLD = .45;
 function distanceKm(a, b) { const R = 6371; const dLat = (b.latitude - a.latitude) * Math.PI / 180; const dLng = (b.longitude - a.longitude) * Math.PI / 180; const lat1 = a.latitude * Math.PI / 180; const lat2 = b.latitude * Math.PI / 180; const x = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); }
