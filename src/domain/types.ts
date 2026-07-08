@@ -1,0 +1,19 @@
+export type JourneyProfileId = 'vauxhall_to_office' | 'waterloo_to_office' | 'surbiton_to_home';
+export type JourneyContext = 'work' | 'home';
+export type ItemCategory = 'grocery' | 'fresh_food' | 'food_drink' | 'pharmacy' | 'toiletries' | 'cards_stationery' | 'household' | 'electronics_accessory' | 'office_supplies' | 'parcel' | 'gift' | 'unknown';
+export type ShopCategory = 'supermarket' | 'convenience_store' | 'pharmacy' | 'stationery' | 'newsagent' | 'electronics' | 'cafe' | 'bakery' | 'parcel_shop' | 'florist' | 'department_store' | 'unknown';
+export type PurchaseOutcomeValue = 'bought' | 'not_found' | 'skipped';
+
+export type LocationPoint = { id: string; label: string; latitude: number; longitude: number; address?: string };
+export type JourneyProfile = { id: JourneyProfileId; label: string; context: JourneyContext; startLocation: LocationPoint; destinationLocation: LocationPoint; defaultMaxExtraWalkMinutes: number; defaultMaxStops: number };
+export type ShoppingItem = { id: string; rawText: string; normalisedName: string; category: ItemCategory; priority: 'must_have' | 'nice_to_have'; quantity?: string };
+export type OpeningHours = { openNow?: boolean; summary?: string };
+export type Shop = { id: string; name: string; chain?: string; location: LocationPoint; categories: ShopCategory[]; openingHours?: OpeningHours; source: 'manual' | 'maps_api' | 'osm' };
+export type ShopCapability = { shopId: string; itemCategory: ItemCategory; confidence: number; source: 'default_rule' | 'manual_override' | 'user_history' };
+export type RouteStop = { sequence: number; shopId: string; shopName: string; location: LocationPoint; itemsToBuy: ShoppingItem[]; confidenceByItemId: Record<string, number> };
+export type MapBounds = { north: number; south: number; east: number; west: number };
+export type RouteMapData = { origin: LocationPoint; destination: LocationPoint; waypoints: LocationPoint[]; polyline?: string; bounds?: MapBounds; externalMapsUrl: string };
+export type RouteOption = { id: string; journeyProfileId: JourneyProfileId; stops: RouteStop[]; coveredItems: ShoppingItem[]; uncoveredItems: ShoppingItem[]; directWalkMinutes: number; routeWalkMinutes: number; extraWalkMinutes: number; estimatedShopMinutesMin: number; estimatedShopMinutesMax: number; totalDelayMinutesMin: number; totalDelayMinutesMax: number; confidenceScore: number; routeScore: number; label: 'recommended' | 'fastest' | 'best_coverage' | 'alternative'; map: RouteMapData };
+export type PurchaseOutcome = { id: string; routeOptionId: string; journeyProfileId: JourneyProfileId; itemId: string; shopId?: string; outcome: PurchaseOutcomeValue; createdAt: string };
+export type RouteConstraints = { maxExtraWalkMinutes: number; maxStops: number; openOnly: boolean; preferFewerStops: boolean; avoidLowConfidence: boolean };
+export type AppState = { selectedJourneyProfileId?: JourneyProfileId; rawShoppingInput: string; parsedItems: ShoppingItem[]; constraints: RouteConstraints; routeOptions: RouteOption[]; selectedRouteOptionId?: string };
