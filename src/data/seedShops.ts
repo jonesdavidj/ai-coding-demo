@@ -1,0 +1,7 @@
+import type { JourneyProfileId, Shop } from '../domain/types';
+const shop = (id:string,name:string,lat:number,lng:number,categories:Shop['categories'], chain?:string): Shop => ({ id, name, chain, location:{id:`${id}_loc`,label:name,latitude:lat,longitude:lng}, categories, source:'manual', openingHours:{summary:'Opening hours unknown'} });
+export const seedShopsByJourney: Record<JourneyProfileId, Shop[]> = {
+ vauxhall_to_office:[shop('v_tesco','Tesco Express Vauxhall',51.4868,-0.1235,['convenience_store'],'Tesco'),shop('v_boots','Boots Vauxhall',51.4878,-0.1230,['pharmacy'],'Boots'),shop('v_news','Vauxhall News',51.4890,-0.1240,['newsagent']),shop('v_sains','Sainsbury\'s Local',51.4920,-0.1248,['supermarket'],'Sainsbury\'s'),shop('v_cafe','Station Cafe',51.4865,-0.1215,['cafe'])],
+ waterloo_to_office:[shop('w_mands','M&S Food Waterloo',51.5030,-0.1138,['supermarket'],'M&S'),shop('w_boots','Boots Waterloo',51.5037,-0.1130,['pharmacy'],'Boots'),shop('w_whsmith','WHSmith Waterloo',51.5035,-0.1125,['newsagent','stationery'],'WHSmith'),shop('w_currys','Currys Strand',51.5080,-0.1215,['electronics'],'Currys'),shop('w_bakery','Lower Marsh Bakery',51.5000,-0.1125,['bakery'])],
+ surbiton_to_home:[shop('s_waitrose','Waitrose Surbiton',51.3930,-0.3046,['supermarket'],'Waitrose'),shop('s_boots','Boots Surbiton',51.3924,-0.3054,['pharmacy'],'Boots'),shop('s_news','Surbiton News',51.3919,-0.3062,['newsagent']),shop('s_stationery','Paper & Pens',51.3914,-0.3067,['stationery']),shop('s_florist','Surbiton Florist',51.3909,-0.3073,['florist'])]
+};
