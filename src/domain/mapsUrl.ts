@@ -5,3 +5,9 @@ export function buildGoogleMapsUrl(origin: LocationPoint, destination: LocationP
   if (waypoints.length) params.set('waypoints', waypoints.map(coord).join('|'));
   return `https://www.google.com/maps/dir/?${params.toString()}`;
 }
+
+export function buildGoogleMapsEmbedUrl(origin: LocationPoint, destination: LocationPoint, waypoints: LocationPoint[] = []) {
+  const destinationPath = [...waypoints, destination].map(coord).join(' to:');
+  const params = new URLSearchParams({ output: 'embed', saddr: coord(origin), daddr: destinationPath, dirflg: 'w' });
+  return `https://www.google.com/maps?${params.toString()}`;
+}
