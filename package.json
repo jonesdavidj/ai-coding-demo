@@ -1,1 +1,9 @@
-{"scripts":{"build":"tsc -p tsconfig.json","dev":"python3 -m http.server 5173","preview":"python3 -m http.server 4173"},"devDependencies":{},"dependencies":{}}
+{
+    "scripts": {
+        "build": "node scripts/build.mjs",
+        "dev": "python3 -m http.server 5173",
+        "preview": "python3 -m http.server 4173 --directory dist"
+    },
+    "devDependencies": {},
+    "dependencies": {}
+}

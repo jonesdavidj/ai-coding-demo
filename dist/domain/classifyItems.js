@@ -1,4 +1,4 @@
-import { itemCategoryMap } from '../config/itemCategoryMap';
+import { itemCategoryMap } from '../config/itemCategoryMap.js';
 const stopWords = /\b(please|get|buy|pick up|some|a|an|the|and)\b/gi;
 export function classifyItems(rawInput) {
     return rawInput.split(/[\n,]+/).map(x => x.replace(stopWords, ' ').trim()).filter(Boolean).slice(0, 10).map((rawText, index) => {

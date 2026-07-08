@@ -1,9 +1,9 @@
-import { journeys } from './config/journeys';
-import { confidenceLabel } from './config/shopCapabilityDefaults';
-import { seedShopsByJourney } from './data/seedShops';
-import { classifyItems } from './domain/classifyItems';
-import { generateRouteCandidates } from './domain/generateRouteCandidates';
-import { selectRouteOptions } from './domain/selectRouteOptions';
+import { journeys } from './config/journeys.js';
+import { confidenceLabel } from './config/shopCapabilityDefaults.js';
+import { seedShopsByJourney } from './data/seedShops.js';
+import { classifyItems } from './domain/classifyItems.js';
+import { generateRouteCandidates } from './domain/generateRouteCandidates.js';
+import { selectRouteOptions } from './domain/selectRouteOptions.js';
 const root = document.getElementById('root');
 let selectedJourneyProfileId = 'vauxhall_to_office';
 let rawShoppingInput = 'milk\nbirthday card\nparacetamol\nUSB-C cable';
