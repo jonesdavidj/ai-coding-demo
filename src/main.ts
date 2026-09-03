@@ -6,6 +6,6 @@ if (!root) {
 
 root.innerHTML = `
   <main class="app-shell">
-    <h1>Hello, World!</h1>
+    <h1>Hello World</h1>
   </main>
 `;
