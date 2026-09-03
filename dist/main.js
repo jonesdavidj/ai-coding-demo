@@ -4,8 +4,6 @@ if (!root) {
 }
 root.innerHTML = `
   <main class="app-shell">
-    <p class="eyebrow">New app</p>
-    <h1>Ready for your next idea.</h1>
-    <p class="intro">This clean starter is ready for a new app experience.</p>
+    <h1>Hello, World!</h1>
   </main>
 `;
