@@ -34,12 +34,32 @@ This clean starting point is version **1.0.0** and is identified by the Git tag:
 coding-demo-baseline-v1.0.0
 ```
 
-To inspect or build from the baseline without changing an existing branch:
+### Return to the v1.0.0 baseline
+
+First, fetch the tag from GitHub:
 
 ```powershell
 git fetch --tags
-git switch -c restore/coding-demo-baseline coding-demo-baseline-v1.0.0
 ```
+
+To inspect or run v1.0.0 without changing the current codebase, create a temporary branch directly from the tag:
+
+```powershell
+git switch -c inspect/coding-demo-baseline coding-demo-baseline-v1.0.0
+```
+
+To roll the codebase back through the normal review process, start with a clean and up-to-date `main`, create a rollback branch, and revert every commit made after the baseline:
+
+```powershell
+git switch main
+git pull --ff-only
+git switch -c restore/coding-demo-baseline-v1.0.0
+git revert --no-commit coding-demo-baseline-v1.0.0..HEAD
+git commit -m "Restore coding demo baseline v1.0.0"
+git push -u origin restore/coding-demo-baseline-v1.0.0
+```
+
+Create a pull request from `restore/coding-demo-baseline-v1.0.0` into `main`. After approval and merge, Vercel will deploy the restored Hello World baseline. This approach preserves the repository history; do not force-push or move `main` back to the tag.
 
 Future changes should increment the version in `package.json` and create a new baseline tag only when a new clean recovery point is intentionally established. Tags should not be moved or reused, which keeps this exact Hello World state recoverable.
 
