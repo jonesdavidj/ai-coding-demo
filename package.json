@@ -1,4 +1,7 @@
 {
+    "name": "baseline-for-coding-demo",
+    "version": "1.0.0",
+    "private": true,
     "scripts": {
         "build": "node scripts/build.mjs",
         "dev": "python3 -m http.server 5173",
