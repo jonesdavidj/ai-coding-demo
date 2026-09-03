@@ -2,6 +2,12 @@
 
 A small, dependency-free Hello World application that demonstrates how an idea can move from an AI-assisted code change to a reviewed GitHub pull request and then to a live Vercel deployment.
 
+## Current feature: Swire Office App
+
+Version **1.1.0** adds an executive journey planner for Swire offices. A traveller can enter a starting point or share browser location, select a verified Swire destination, and continue the journey in a region-appropriate mapping service. The app also provides Hong Kong taxi-colour guidance and a bilingual arrival card that can be copied or shown to a driver.
+
+The initial directory is sourced from official [Swire Group](https://www.swire.com/en/about/overview.php), [Swire office directory](https://www.swire.com/en/contact/all_offices.php?by=division), [Swire Properties](https://www.swireproperties.com/en/contact-us/), and [HAECO](https://www.haeco.com/en/about/haeco-group/haeco-hong-kong) pages. Hong Kong taxi advice follows the [Transport Department's operating-area guidance](https://www.td.gov.hk/en/transport_in_hong_kong/public_transport/taxi/details_of_taxi_operating_areas_/).
+
 ## Delivery flow
 
 ```mermaid
