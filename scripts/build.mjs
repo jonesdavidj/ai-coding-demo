@@ -1,25 +1,9 @@
 import { copyFile, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = fileURLToPath(new URL('..', import.meta.url));
 const distDir = join(root, 'dist');
-
-function run(command, args) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' });
-    child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`${command} ${args.join(' ')} exited with ${code}`))));
-    child.on('error', reject);
-  });
-}
-
-function commandExists(command) {
-  return new Promise((resolve) => {
-    const child = spawn(process.platform === 'win32' ? 'where' : 'command', process.platform === 'win32' ? [command] : ['-v', command], { shell: true, stdio: 'ignore' });
-    child.on('exit', (code) => resolve(code === 0));
-    child.on('error', () => resolve(false));
-  });
-}
 
 async function rewriteModuleSpecifiers(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -43,12 +27,7 @@ async function rewriteModuleSpecifiers(dir) {
 await rm(distDir, { recursive: true, force: true });
 await mkdir(distDir, { recursive: true });
 
-if (await commandExists('tsc')) {
-  await run('tsc', ['-p', 'tsconfig.json']);
-} else {
-  console.warn('TypeScript compiler not found; copying the browser-compatible entry file.');
-  await copyFile(join(root, 'src/main.ts'), join(distDir, 'main.js'));
-}
+await copyFile(join(root, 'src/main.ts'), join(distDir, 'main.js'));
 
 await rewriteModuleSpecifiers(distDir);
 await copyFile(join(root, 'src/styles.css'), join(distDir, 'styles.css'));
