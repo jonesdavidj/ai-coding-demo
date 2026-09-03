@@ -1,4 +1,4 @@
-const root = document.querySelector<HTMLDivElement>('#root');
+const root = document.querySelector('#root');
 
 if (!root) {
   throw new Error('App root element was not found.');

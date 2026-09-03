@@ -46,7 +46,8 @@ await mkdir(distDir, { recursive: true });
 if (await commandExists('tsc')) {
   await run('tsc', ['-p', 'tsconfig.json']);
 } else {
-  console.warn('TypeScript compiler not found; using committed dist JavaScript assets.');
+  console.warn('TypeScript compiler not found; copying the browser-compatible entry file.');
+  await copyFile(join(root, 'src/main.ts'), join(distDir, 'main.js'));
 }
 
 await rewriteModuleSpecifiers(distDir);
