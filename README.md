@@ -2,12 +2,6 @@
 
 A small, dependency-free Hello World application that demonstrates how an idea can move from an AI-assisted code change to a reviewed GitHub pull request and then to a live Vercel deployment.
 
-## Current feature: Swire Office App
-
-Version **1.1.0** adds an executive journey planner for Swire offices. A traveller can enter a starting point or share browser location, select a verified Swire destination, and continue the journey in a region-appropriate mapping service. The app also provides Hong Kong taxi-colour guidance and a bilingual arrival card that can be copied or shown to a driver.
-
-The initial directory is sourced from official [Swire Group](https://www.swire.com/en/about/overview.php), [Swire office directory](https://www.swire.com/en/contact/all_offices.php?by=division), [Swire Properties](https://www.swireproperties.com/en/contact-us/), and [HAECO](https://www.haeco.com/en/about/haeco-group/haeco-hong-kong) pages. Hong Kong taxi advice follows the [Transport Department's operating-area guidance](https://www.td.gov.hk/en/transport_in_hong_kong/public_transport/taxi/details_of_taxi_operating_areas_/).
-
 ## Delivery flow
 
 ```mermaid
@@ -40,32 +34,12 @@ This clean starting point is version **1.0.0** and is identified by the Git tag:
 coding-demo-baseline-v1.0.0
 ```
 
-### Return to the v1.0.0 baseline
-
-First, fetch the tag from GitHub:
+To inspect or build from the baseline without changing an existing branch:
 
 ```powershell
 git fetch --tags
+git switch -c restore/coding-demo-baseline coding-demo-baseline-v1.0.0
 ```
-
-To inspect or run v1.0.0 without changing the current codebase, create a temporary branch directly from the tag:
-
-```powershell
-git switch -c inspect/coding-demo-baseline coding-demo-baseline-v1.0.0
-```
-
-To roll the codebase back through the normal review process, start with a clean and up-to-date `main`, create a rollback branch, and revert every commit made after the baseline:
-
-```powershell
-git switch main
-git pull --ff-only
-git switch -c restore/coding-demo-baseline-v1.0.0
-git revert --no-commit coding-demo-baseline-v1.0.0..HEAD
-git commit -m "Restore coding demo baseline v1.0.0"
-git push -u origin restore/coding-demo-baseline-v1.0.0
-```
-
-Create a pull request from `restore/coding-demo-baseline-v1.0.0` into `main`. After approval and merge, Vercel will deploy the restored Hello World baseline. This approach preserves the repository history; do not force-push or move `main` back to the tag.
 
 Future changes should increment the version in `package.json` and create a new baseline tag only when a new clean recovery point is intentionally established. Tags should not be moved or reused, which keeps this exact Hello World state recoverable.
 
