@@ -1,11 +1,60 @@
-import {mkdir,rm,writeFile} from 'node:fs/promises';
-import app from '../worker/index.js';
-const dist=new URL('../dist/',import.meta.url);
-await rm(dist,{recursive:true,force:true});
-await mkdir(dist,{recursive:true});
-for(const [path,file] of [['/','index.html'],['/cabinet.svg','cabinet.svg']]) {
- const response=await app.fetch(new Request('https://build.invalid'+path));
- if(!response.ok)throw new Error('Build failed: '+file);
- await writeFile(new URL(file,dist),await response.text());
+import { copyFile, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { spawn } from 'node:child_process';
+
+const root = new URL('..', import.meta.url).pathname;
+const distDir = join(root, 'dist');
+
+function run(command, args) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' });
+    child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`${command} ${args.join(' ')} exited with ${code}`))));
+    child.on('error', reject);
+  });
 }
-console.log('Built May Lam static page and illustration. Live catalogue API is served by api/catalogue.js.');
+
+function commandExists(command) {
+  return new Promise((resolve) => {
+    const child = spawn(process.platform === 'win32' ? 'where' : 'command', process.platform === 'win32' ? [command] : ['-v', command], { shell: true, stdio: 'ignore' });
+    child.on('exit', (code) => resolve(code === 0));
+    child.on('error', () => resolve(false));
+  });
+}
+
+async function rewriteModuleSpecifiers(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  await Promise.all(entries.map(async (entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      await rewriteModuleSpecifiers(path);
+      return;
+    }
+    if (!entry.isFile() || !entry.name.endsWith('.js')) return;
+
+    const source = await readFile(path, 'utf8');
+    const rewritten = source.replace(/(from\s+['"])(\.\.?\/[^'"]+)(['"])/g, (_match, start, specifier, end) => {
+      if (/\.[cm]?js$/.test(specifier)) return `${start}${specifier}${end}`;
+      return `${start}${specifier}.js${end}`;
+    });
+    if (rewritten !== source) await writeFile(path, rewritten);
+  }));
+}
+
+await rm(distDir, { recursive: true, force: true });
+await mkdir(distDir, { recursive: true });
+
+if (await commandExists('tsc')) {
+  await run('tsc', ['-p', 'tsconfig.json']);
+} else {
+  console.warn('TypeScript compiler not found; copying the browser-compatible entry file.');
+  await copyFile(join(root, 'src/main.ts'), join(distDir, 'main.js'));
+}
+
+await rewriteModuleSpecifiers(distDir);
+await copyFile(join(root, 'src/styles.css'), join(distDir, 'styles.css'));
+
+const html = await readFile(join(root, 'index.html'), 'utf8');
+const deployHtml = html
+  .replace('./src/styles.css', './styles.css')
+  .replace('./dist/main.js', './main.js');
+await writeFile(join(distDir, 'index.html'), deployHtml);
