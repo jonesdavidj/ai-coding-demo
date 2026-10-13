@@ -6,6 +6,6 @@ if (!root) {
 
 root.innerHTML = `
   <main class="app-shell">
-    <h1>Hello May Lam-Kobayahi</h1>
+    <h1>Hello Richard Sell!</h1>
   </main>
 `;
