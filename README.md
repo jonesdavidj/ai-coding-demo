@@ -1,50 +1,33 @@
-# Baseline for Coding Demo
+# Casa delle Olive · Montone, Umbria
 
-A small, dependency-free Hello World application that demonstrates how an idea can move from an AI-assisted code change to a reviewed GitHub pull request and then to a live Vercel deployment.
+A dependency-free rental and guest-guide website for an imagined Italian country house. “Casa delle Olive” is a working name; the property photographs are AI-generated concept imagery. Capacity, bedrooms, pool, rates and house policies are illustrative and must be replaced with the owner's confirmed information.
 
-## Delivery flow
+## Visitor experience
 
-```mermaid
-flowchart LR
-    A[Describe the change] --> B[AI updates and checks the code]
-    B --> C[Feature branch]
-    C --> D[GitHub pull request]
-    D --> E{Approved?}
-    E -- Changes requested --> B
-    E -- Yes --> F[Merge to main]
-    F --> G[Vercel build]
-    G --> H[Live web app]
+- Responsive rental homepage with generated exterior and interior photographs.
+- Discover Umbria page with filterable suggestions and Google Maps links.
+- Guest guide covering arrival, household equipment, local essentials, emergencies and departure. Unconfirmed instructions and contacts are explicitly marked.
+- Interactive April–October 2027 calendar with fabricated unavailable dates, a three-night minimum and a sample €240/night plus €95 cleaning price calculation.
+- Demo checkout carrying selected dates and guest count into an itemised summary. It does not collect card details, send guest information, take payments or reserve dates.
+
+## Development
+
+Requires Node.js 18+ for the build and Python 3 for the existing preview commands. No dependency installation is needed.
+
+```sh
+npm run dev
+npm run build
+npm run preview
 ```
 
-The AI coding agent works in a feature branch and updates the repository files. The branch is pushed to GitHub as a pull request so a person can review and approve it. Once merged into `main`, Vercel runs `npm run build`, publishes the `dist` directory, and serves the resulting application at the configured Vercel URL.
+Development serves the source at http://localhost:5173. Production preview serves `dist/` at http://localhost:4173. Hash routes support navigation on static hosting without server routes. `scripts/build.mjs` copies source JavaScript, CSS and local images into `dist/`, and rewrites the HTML asset references. The tracked `dist/` is regenerated with every source change.
 
-## How Hello World works
+The existing Vercel configuration builds and serves `dist/`. Merging the pull request follows the repository's existing deployment flow. Google Fonts is optional: system font fallbacks work if the font service is unavailable.
 
-1. `index.html` provides the browser page and an empty `<div id="root"></div>` mount point.
-2. `src/main.ts` finds that mount point and inserts an `<h1>Hello World</h1>` heading.
-3. `src/styles.css` centres the heading and supplies the page styling.
-4. `scripts/build.mjs` recreates `dist`, produces `dist/main.js`, copies the stylesheet, and rewrites the HTML asset paths for deployment.
-5. `vercel.json` tells Vercel to run the build, publish `dist`, and route requests back to the application entry page.
+## Before taking real bookings
 
-## Baseline version
+Provide the real house name, address, capacity, amenities, photographs, access instructions and private guest contacts. Confirm prices, taxes, deposits, cancellation terms and live availability. Integrate a payment provider using hosted checkout and server-side confirmation before enabling real payment or booking actions. This browser-only demo has no backend, persistence or booking inventory.
 
-This clean starting point is version **1.0.0** and is identified by the Git tag:
+## Validation
 
-```text
-coding-demo-baseline-v1.0.0
-```
-
-To inspect or build from the baseline without changing an existing branch:
-
-```powershell
-git fetch --tags
-git switch -c restore/coding-demo-baseline coding-demo-baseline-v1.0.0
-```
-
-Future changes should increment the version in `package.json` and create a new baseline tag only when a new clean recovery point is intentionally established. Tags should not be moved or reused, which keeps this exact Hello World state recoverable.
-
-## Commands
-
-- `npm run dev` serves the project locally at <http://localhost:5173>.
-- `npm run build` compiles the application into `dist`.
-- `npm run preview` serves the production build at <http://localhost:4173>.
+The production build and JavaScript syntax checks pass. Browser checks cover desktop, tablet and mobile layout; calendar minimum stays and blocked intervals; price calculation; date and guest transfer to checkout; demo completion; discovery filters; guest-guide sections; and gallery opening and dismissal.
