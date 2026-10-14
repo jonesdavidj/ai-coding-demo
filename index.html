@@ -2,13 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple greeting: Hello Augustus!" />
-    <title>Hello Augustus!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#251232" />
+    <meta name="description" content="Augustus's Special Watches: discover antique and vintage watches from 20 independent vendors in 10 countries. Search by brand, age, dial colour and style, then visit the original seller." />
+    <title>Augustus's Special Watches — A World of Remarkable Timepieces</title>
+    <link rel="icon" type="image/svg+xml" href="./src/assets/crest.svg" />
     <link rel="stylesheet" href="./src/styles.css" />
+    <script type="module" src="./src/main.mjs"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="./dist/main.js"></script>
+    <a class="skip-link" href="#collection">Skip to the collection</a>
+    <div class="announcement">REMARKABLE TIMEPIECES. EXTRAORDINARY HISTORIES. <span>DISCOVERED WORLDWIDE.</span></div>
+    <header class="header">
+      <a class="brand" href="#home" aria-label="Augustus's Special Watches home"><img src="./src/assets/crest.svg" width="44" height="48" alt="" /><span>AUGUSTUS'S<small>SPECIAL WATCHES</small></span></a>
+      <nav aria-label="Main navigation"><a href="#collection">The collection</a><a href="#vendors">Our worldwide edit</a><a href="#guide">The collector's notes</a></nav>
+      <button class="saved-nav" id="saved-nav" aria-label="Show my saved-watch shortlist" aria-pressed="false"><span class="heart-icon" aria-hidden="true">♡</span><span>My shortlist</span><span id="saved-count" class="saved-count">0</span></button>
+    </header>
+    <main>
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-visual" role="img" aria-label="Editorial illustration of a gold antique pocket watch on purple velvet"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
+        <div class="hero-copy"><div class="eyebrow"><span class="gold-line"></span> A WORLD OF REMARKABLE WATCHES</div><h1 id="hero-title">For those who<br>collect <em>time.</em></h1><p>Some things grow more beautiful with time.<br>Discover antique treasures and vintage icons,<br>chosen from independent vendors around the world.</p><a class="button button-gold" href="#collection">Explore the collection <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="#guide">A little history. A lot of character.</a></div>
+        <div class="hero-caption"><span>THE ART OF TIMEKEEPING</span><small>An editorial illustration</small></div>
+        <div class="hero-bottom"><span>CURATED WITH CURIOSITY. COLLECTED WITH CARE.</span><a href="#collection" aria-label="Scroll to the collection">SCROLL TO DISCOVER <span aria-hidden="true">↓</span></a></div>
+      </section>
+      <section class="collection-stats" aria-label="Collection at a glance"><div><strong id="stat-watches">45</strong><span>remarkable timepieces</span></div><div><strong id="stat-vendors">20</strong><span>independent vendors</span></div><div><strong id="stat-countries">10</strong><span>countries to explore</span></div><p>A world of watches.<br><em>One considered collection.</em></p></section>
+      <section id="collection" class="collection section-wrap" aria-labelledby="collection-title">
+        <div class="section-heading"><div><p class="eyebrow dark">THE AUGUSTUS EDIT</p><h2 id="collection-title">Find your <em>next heirloom.</em></h2></div><p>From centuries-old pocket watches to mid-century icons.<br>Find the piece that speaks to you.</p></div>
+        <div class="collection-search"><div class="search-box"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><label class="sr-only" for="search">Search watches</label><input id="search" type="search" placeholder="Search a brand, model, year, colour or vendor…" autocomplete="off" /><kbd aria-hidden="true">/</kbd></div><button id="mobile-filters" class="filter-toggle" aria-expanded="false" aria-controls="filter-panel">Filters <span id="filter-count">0</span></button></div>
+        <div class="quick-edits" aria-label="Explore an edit"><button data-preset="all" class="active" aria-pressed="true">The full collection</button><button data-preset="antique" aria-pressed="false">Century-old treasures</button><button data-preset="dress" aria-pressed="false">Dress classics</button><button data-preset="chrono" aria-pressed="false">Chronographs</button><button data-preset="pocket" aria-pressed="false">Pocket watches</button></div>
+        <div class="collection-layout">
+          <aside class="filters" id="filter-panel" aria-label="Filter watches"><div class="filter-heading"><h3>Refine your search</h3><button id="reset" class="text-button">Reset</button></div><form id="filters">
+            <label class="filter-group">Brand<select name="brand" id="brand"><option value="">All watchmakers</option></select></label>
+            <label class="filter-group">Age<select name="age" id="age"><option value="">All ages</option><option value="antique">100+ years · Antique</option><option value="75-99">75–99 years</option><option value="50-74">50–74 years</option><option value="25-49">25–49 years</option></select><small>Based on vendor dates; approximate eras may overlap.</small></label>
+            <fieldset class="filter-group colour-group"><legend>Dial colour</legend><div id="colour-options" class="colour-options"></div></fieldset>
+            <label class="filter-group">Genre / style<select name="genre" id="genre"><option value="">Every style</option></select></label>
+            <label class="filter-group">Vendor location<select name="country" id="country"><option value="">Anywhere in the world</option></select></label>
+            <label class="filter-group">Vendor<select name="vendor" id="vendor"><option value="">All independent vendors</option></select></label>
+            <label class="filter-group">Price currency<select name="currency" id="currency"><option value="">All original currencies</option></select><small>Prices stay in the seller's currency.</small></label>
+            <label class="archive-toggle"><input type="checkbox" id="archives" name="archives" /> Include sold archive pieces</label>
+          </form><div class="filter-note"><span aria-hidden="true">✧</span><h4>A considered purchase</h4><p>Explore here. Purchase directly from the original vendor. Ask about service history, originality, delivery and returns.</p><a href="#guide">Read the collector's notes ↗</a></div></aside>
+          <div class="collection-results"><div class="results-toolbar"><p id="result-count" role="status" aria-live="polite">Loading the collection…</p><label class="sort-label" for="sort">Sort by<select id="sort"><option value="curated">Augustus's edit</option><option value="oldest">Oldest first</option><option value="newest">Newest first</option><option value="brand">Brand A–Z</option><option value="price-low" disabled>Price ↑ · choose a currency</option><option value="price-high" disabled>Price ↓ · choose a currency</option></select></label></div><div id="active-filters" class="active-filters" aria-label="Applied filters"></div><div id="watch-grid" class="watch-grid"></div><div id="pagination" class="pagination"></div><p class="catalogue-note">A researched selection, not a live inventory feed. Prices and stock can change. Listed prices were found on vendor pages; confirm the current total, taxes and shipping with the seller. Photographs belong to their respective vendors.</p></div>
+        </div>
+      </section>
+      <section id="vendors" class="vendors-section" aria-labelledby="vendor-title"><div class="section-wrap"><div class="section-heading"><div><p class="eyebrow dark">DISCOVERY WITHOUT BORDERS</p><h2 id="vendor-title">A worldwide <em>perspective.</em></h2></div><p>Independent specialists. Individual points of view.<br>Explore the people behind the pieces.</p></div><div class="vendor-toolbar"><p><span id="vendor-total">20</span> vendors across <span id="country-total">10</span> countries</p><label class="sr-only" for="vendor-region">Filter vendor directory by region</label><select id="vendor-region"><option value="">All regions</option><option>Europe</option><option>North America</option><option>Asia</option><option>Oceania</option><option>Africa</option></select></div><div id="vendor-directory" class="vendor-directory"></div><p class="directory-note">An independent directory of source vendors. Inclusion does not imply a partnership or an Augustus authenticity guarantee.</p></div></section>
+      <section id="guide" class="guide section-wrap" aria-labelledby="guide-title"><div class="guide-intro"><p class="eyebrow dark">THE COLLECTOR'S NOTES</p><h2 id="guide-title">Buy with curiosity.<br><em>Collect with confidence.</em></h2><p>The right watch is only half the story.<br>Get to know its history—and its seller.</p></div><div class="guide-notes"><details open><summary><span>01</span> Antique or vintage?<span class="plus" aria-hidden="true">+</span></summary><p>In this collection, “antique” means at least 100 years old. Later historical watches are labelled vintage. Vendor dates are often approximate; a decade is shown as a range rather than an invented exact year.</p></details><details><summary><span>02</span> Ask about the details.<span class="plus" aria-hidden="true">+</span></summary><p>Request movement photographs, service records, serial numbers and a written condition report. Ask whether the dial, hands, crown, case or bracelet have been replaced or restored. A beautiful patina and a refinished dial tell different stories.</p></details><details><summary><span>03</span> Make the journey clear.<span class="plus" aria-hidden="true">+</span></summary><p>Before paying, confirm the currency, insurance, shipping destination, import duties, payment method, return window and warranty directly with the vendor. Availability shown here is a research snapshot, so always check the original listing.</p></details><details><summary><span>04</span> Care for a little history.<span class="plus" aria-hidden="true">+</span></summary><p>Old water-resistance ratings are not a present-day promise. Ask the seller about safe daily use, winding, servicing and storage. Keep delicate historic watches away from water, strong magnets and shocks.</p></details></div></section>
+    </main>
+    <footer><div class="footer-top section-wrap"><a class="brand" href="#home"><img src="./src/assets/crest.svg" width="44" height="48" alt="" /><span>AUGUSTUS'S<small>SPECIAL WATCHES</small></span></a><p>Time passes.<br><em>Good taste endures.</em></p><a href="#collection">Back to the collection ↑</a></div><div class="footer-bottom section-wrap"><span>© <span id="current-year">2026</span> Augustus's Special Watches</span><span id="research-date">Collection researched 14 October 2026</span><span>Discover here. Buy from the original seller.</span></div></footer>
+    <dialog id="watch-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Close watch details">×</button><div id="dialog-content"></div></dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <noscript><p class="noscript">Enable JavaScript to search the catalogue. You can also explore <a href="https://antique-watch.com/shop/">Pieces of Time</a> and <a href="https://www.analogshift.com/collections/vintage-watches">Analog:Shift</a> directly.</p></noscript>
   </body>
 </html>
