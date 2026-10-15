@@ -1,12 +1,12 @@
 {
-  "name": "baseline-for-coding-demo",
-  "version": "1.1.0",
-  "private": true,
-  "scripts": {
-    "build": "node scripts/build.mjs",
-    "dev": "python3 -m http.server 5173",
-    "preview": "python3 -m http.server 4173 --directory dist"
-  },
-  "devDependencies": {},
-  "dependencies": {}
+    "name": "baseline-for-coding-demo",
+    "version": "1.0.2",
+    "private": true,
+    "scripts": {
+        "build": "node scripts/build.mjs",
+        "dev": "python3 -m http.server 5173",
+        "preview": "python3 -m http.server 4173 --directory dist"
+    },
+    "devDependencies": {},
+    "dependencies": {}
 }
