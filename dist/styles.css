@@ -52,7 +52,7 @@ p { margin: 0 0 18px; }
 .hero { height: calc(100svh - 130px); min-height: 620px; max-height: 1000px; position: relative; overflow: hidden; color: white; background: #586366; }
 .hero-photo, .hero-shade { position: absolute; inset: 0; }
 .hero-photo {
-  background: url("https://cdn.uc.assets.prezly.com/25f10416-8b57-4c27-b0ca-3b62062d6e00/-/preview/2048x2048/-/quality/best/-/format/auto/") center center / cover no-repeat;
+  background: linear-gradient(115deg, #0b304e 0%, #145576 60%, #397c96 100%);
 }
 .hero-shade { background: linear-gradient(90deg, rgba(12, 23, 40, .75) 0%, rgba(12, 23, 40, .32) 43%, rgba(12, 23, 40, .08) 100%); }
 .hero-copy { position: absolute; left: 16.2%; right: 10%; top: 41%; }
@@ -67,9 +67,9 @@ p { margin: 0 0 18px; }
 .hero-thumb { width: 226px; height: 104px; padding: 14px 16px; border: 3px solid transparent; background-size: cover; background-position: center; color: white; text-align: left; font-size: 22px; line-height: 1.45; font-weight: 700; position: relative; }
 .hero-thumb span { position: relative; z-index: 1; }
 .hero-thumb::before { content: ""; position: absolute; inset: 0; background: #0b233d65; }
-.hero-thumb:nth-child(1) { background-image: url("https://www.swirepacific.com/storage/media/90510/At-a-Glance.png"); }
-.hero-thumb:nth-child(2) { background-image: url("https://www.swirepacific.com/storage/media/90500/dividend_history.png"); }
-.hero-thumb:nth-child(3) { background-image: url("https://cdn.uc.assets.prezly.com/25f10416-8b57-4c27-b0ca-3b62062d6e00/-/preview/2048x2048/-/quality/best/-/format/auto/"); }
+.hero-thumb:nth-child(1) { background: #164b6b; }
+.hero-thumb:nth-child(2) { background: #235e7b; }
+.hero-thumb:nth-child(3) { background: #33728c; }
 .hero-thumb[aria-pressed="true"] { border-color: white; }
 .hero-thumb:hover::before { background: #0b233d35; }
 .carousel-pause { display: grid; place-items: center; border: 0; width: 40px; height: 40px; border-radius: 50%; background: #6c808e; color: white; font-size: 20px; font-weight: 400; }
@@ -125,7 +125,7 @@ h2, .intro h2 { color: var(--navy); font-size: 40px; line-height: 1.25; font-wei
 .route { padding: 24px 28px; background: var(--pale); margin-top: 35px; font-size: 16px; }
 .route strong { color: var(--navy); }
 .learn { display: grid; grid-template-columns: 1.15fr 1fr; gap: 55px; }
-.video-poster { background: linear-gradient(90deg, #092b46a6, #092b461a), url("https://cdn.uc.assets.prezly.com/25f10416-8b57-4c27-b0ca-3b62062d6e00/-/preview/2048x2048/-/quality/best/-/format/auto/") center / cover, #304f64; min-height: 320px; color: white; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; }
+.video-poster { background: linear-gradient(115deg, #0b304e, #397c96); min-height: 320px; color: white; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; }
 .video-poster .label { font-size: 12px; }
 .play { display: grid; place-items: center; width: 54px; height: 54px; border: 1px solid white; border-radius: 50%; font-size: 22px; }
 .video-poster h3 { font-size: 28px; margin: 18px 0 5px; font-weight: 400; }
