@@ -2,55 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#f7f4eb" />
-    <meta
-      name="description"
-      content="Dream of slower days in Montone, Umbria. Explore Casa delle Olive, plan your stay and discover your Italian home away from home."
-    />
-    <title>Casa delle Olive — A slower kind of Italy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple greeting: Hello Augustus!" />
+    <title>Hello Augustus!</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
-    <header>
-      <a class="brand" href="#home"
-        ><span class="brandmark">⌁</span
-        ><span>CASA DELLE OLIVE<small>MONTONE · UMBRIA</small></span></a
-      ><button class="menu" aria-label="Open navigation" aria-expanded="false">
-        ☰
-      </button>
-      <nav aria-label="Main navigation">
-        <a href="#home">The house</a><a href="#discover">Discover Umbria</a
-        ><a href="#guide">Guest guide</a
-        ><a class="navbook" href="#stay">Plan your stay <span>↗</span></a>
-      </nav>
-    </header>
-    <main id="main" tabindex="-1"></main>
-    <footer>
-      <div>
-        <a class="brand" href="#home">CASA DELLE OLIVE</a>
-        <p>A little more time. A little more Italy.</p>
-      </div>
-      <div>
-        <a href="#discover">Explore the area</a
-        ><a href="#guide">Your guest guide</a
-        ><a href="#stay">Availability & rates</a><a href="#payment">Payment</a>
-      </div>
-      <small
-        >Montone, Umbria, Italy<br />Concept property · Imagined imagery and
-        sample house details.<br />Demo availability and prices. No bookings or
-        payments are taken.</small
-      >
-    </footer>
-    <dialog id="gallery">
-      <button class="close" aria-label="Close gallery">×</button
-      ><img
-        src="assets/house.png"
-        alt="Imagined stone farmhouse in the Umbrian countryside"
-      />
-      <p>Casa delle Olive · Imagined property imagery</p>
-    </dialog>
-    <script src="./src/main.js"></script>
+    <div id="root"></div>
+    <script type="module" src="./dist/main.js"></script>
   </body>
 </html>
