@@ -52,3 +52,25 @@ tabs.forEach((tab, index) => {
     }
   });
 });
+
+// Keep the credit and source link available when an external photo cannot load.
+document.querySelectorAll('figure.photo img').forEach(image => {
+  const showFallback = () => {
+    const placeholder = image.parentElement?.querySelector('.photo-unavailable');
+    image.setAttribute('hidden', '');
+    placeholder?.removeAttribute('hidden');
+  };
+  image.addEventListener('error', showFallback);
+  if (image instanceof HTMLImageElement && image.complete && image.naturalWidth === 0) {
+    showFallback();
+  }
+});
+
+const sources = document.querySelector('#sources');
+const revealSources = () => {
+  if (sources instanceof HTMLDetailsElement && window.location.hash === '#sources') {
+    sources.open = true;
+  }
+};
+window.addEventListener('hashchange', revealSources);
+revealSources();
